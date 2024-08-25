@@ -1,0 +1,32 @@
+1. SPF Record:
+
+    Details: The SPF record found (v=spf1 include:spf.protection.outlook.com -all) indicates that smartcybersolutions.au authorizes the servers at spf.protection.outlook.com to send mail on its behalf. The -all mechanism suggests that if the SPF check fails for other IPs, then the mail should be failed i.e., the mail will be seen as coming from an unauthorized source.
+
+    Significance: SPF records are essential in preventing others from using your domain to send spam or malicious emails.
+
+    Correct Configuration: The SPF record appears to be correctly configured. However, emails coming from servers/IPs other than those specified in the SPF will be marked as deceptive or spam.
+
+2. DKIM Records:
+
+    Found Selectors: selector1
+    Public Key Record: A long string that starts with "MIIBIjANBgkqh..."
+
+    Significance: DKIM verifies a message wasn't altered during transit, ensuring the integrity of the message.
+
+    Proper Configuration: The current record seems correctly configured. It correlates that an email said to be from smartcybersolutions.au genuinely is.
+
+3. DMARC Record:
+
+    Details: The DMARC record found is "v=DMARC1; p=none;" which means that the domain publishes a DMARC record and the policy applied should be "none".
+
+    Impact on Email Delivery and Security: A "none" policy doesn't influence the delivery of messages. Instead, it allows domain owners to receive feedback about messages, authenticated or not, sent from the domain, which helps in understanding and improving its security.
+
+4. Security Status: 
+
+    Based on the SPF, DKIM, and DMARC records, the domain smartcybersolutions.au seems to be "Secure".
+
+5. Mitigation for Potential Issues:
+
+    While the current records indicate a well-configured security stance, it's suggested to change the DMARC policy from "none" to "quarantine" or "reject". This triggers actions for unauthenticated emails. Receivers will either put them in the spam folder (if policy=quarantine) or reject them outright (if policy=reject). Start with a small percentage of messages to ward against potential misconfigurations.
+
+    Furthermore, regular monitoring and analysis are needed to maintain the domain's integrity. Review DMARC reports to gather insights about email sending activity and potential security risks. For instance, if there's a sudden spike in failed messages, it could mean a spammer is trying to exploit your domain.
